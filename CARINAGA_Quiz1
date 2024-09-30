@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class EnrollmentDetails {
+    static String studName;
+    static String courseTitle;
+    static String courseIdentifier;
+    static double unitCount;
+    static double paidAmount;
+
+    public static void collectStudentInfo() {
+        Scanner input = new Scanner(System.in);
+
+        // Collecting student details
+        System.out.println("Enter Student Name: ");
+        studName = input.nextLine();
+        System.out.println("Enter Course: ");
+        courseTitle = input.nextLine();
+        System.out.println("Enter Course Code: ");
+        courseIdentifier = input.nextLine();
+        System.out.println("Enter Number of Units: ");
+        unitCount = input.nextInt();
+    }
+
+    public static double calculateFee(){
+        // Calculate the total fee based on the number of units
+        return unitCount * 1000;
+    }
+
+    public static void processPayment(){
+        // Prompting for payment details
+        System.out.println("Proceeding to payment...");
+        System.out.println("Enter the payment amount: ");
+        Scanner input = new Scanner(System.in);
+        paidAmount = input.nextDouble();
+    }
+}
+
+class Main {
+    public static void main (String[] args) {
+        EnrollmentDetails details = new EnrollmentDetails();
+
+        details.collectStudentInfo(); // Gather student information
+        System.out.println("Student Name: " + EnrollmentDetails.studName);
+        System.out.println("Total Enrollment Fee: " + details.calculateFee());
+        System.out.println("--------------------------------------------");
+        details.processPayment(); // Collect payment details
+
+        // Checking if the payment matches the total fee
+        if (details.calculateFee() == EnrollmentDetails.paidAmount) {
+            System.out.println("Payment Status: Fully Paid");
+        } else if(details.calculateFee() > EnrollmentDetails.paidAmount){
+            System.out.println("Payment Status: Partial Payment");
+            System.out.println("Amount Paid: " + EnrollmentDetails.paidAmount);
+        }
+    }
+}
